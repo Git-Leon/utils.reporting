@@ -9,7 +9,7 @@
 ## Objective
 
 #### Part 1 - ...
-* Ensure that all test cases in `com.github.curriculeon` pass with 100% success rate. 
+* Ensure that all test cases in `com.github.git_leon` pass with 100% success rate. 
 
 
 

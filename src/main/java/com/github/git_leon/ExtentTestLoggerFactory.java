@@ -15,9 +15,9 @@ import java.util.Optional;
 public class ExtentTestLoggerFactory {
     private final ExtentHtmlReporter extentHtmlReporters;
     private final ExtentReports extentReports;
-    private final List<ExtentTest> extentTests;
+    private final List<ExtentTestLogger> extentTests;
 
-    public ExtentTestLoggerFactory(ExtentReports extentReports, ExtentHtmlReporter extentHtmlReporters, List<ExtentTest> extentTests) {
+    public ExtentTestLoggerFactory(ExtentReports extentReports, ExtentHtmlReporter extentHtmlReporters, List<ExtentTestLogger> extentTests) {
         this.extentReports = extentReports;
         this.extentHtmlReporters = extentHtmlReporters;
         this.extentTests = extentTests;
@@ -35,18 +35,19 @@ public class ExtentTestLoggerFactory {
         return extentHtmlReporters;
     }
 
-    public List<ExtentTest> getExtentTests() {
+    public List<ExtentTestLogger> getExtentTestLoggers() {
         return extentTests;
     }
 
-    public ExtentTest createExtentTest(String testName, String description) {
-        return getExtentTest(testName).orElse(extentReports.createTest(testName, description));
+    public ExtentTestLogger createExtentTestLogger(String testName, String description) {
+        return getExtentTestLogger(testName).orElse(new ExtentTestLogger(extentReports.createTest(testName, description)));
     }
 
-    public Optional<ExtentTest> getExtentTest(String testName) {
-        return getExtentTests()
+    public Optional<ExtentTestLogger> getExtentTestLogger(String testName) {
+        return getExtentTestLoggers()
                 .stream()
                 .filter(extentTest -> extentTest
+                        .getExtentTest()
                         .getModel()
                         .getName()
                         .equals(testName))

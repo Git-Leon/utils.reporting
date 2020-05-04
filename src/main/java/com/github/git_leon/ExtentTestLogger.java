@@ -41,6 +41,10 @@ public class ExtentTestLogger implements SimpleLoggerInterface {
         return isEnabled;
     }
 
+    public ExtentTest getExtentTest() {
+        return extentTest;
+    }
+
     private Status getStatus(Level level) {
         switch (level.getName().toUpperCase()) {
             case "WARN":
